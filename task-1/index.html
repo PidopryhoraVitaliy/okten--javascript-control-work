@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manage pair list</title>
+    <link rel="stylesheet" href="rest.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-tablet.css">
+    <link rel="stylesheet" href="style-mobile.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Test</h2>
+
+    <div class="row">
+        <div class="data-column">
+            <label for="pairInput">Name/Value Pair</label>
+            <input type="text" id="pairInput" placeholder="Name=Value">
+        </div>
+        <div class="buttons-column">
+            <button id="addBtn">Add</button>
+            <button id="defaultBtn">Fill Default</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="data-column">
+            <label for="pairList">Name/Value Pair List</label>
+            <select id="pairList" multiple></select>
+        </div>
+        <div class="buttons-column">
+            <button id="sortNameBtn">Sort by Name</button>
+            <button id="sortValueBtn">Sort by Value</button>
+            <button id="deleteBtn">Delete</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
