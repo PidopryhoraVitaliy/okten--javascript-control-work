@@ -1,0 +1,15 @@
+#post-details-container {
+    margin-bottom: 20px;
+}
+
+#comments-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.comment-card {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
