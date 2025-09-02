@@ -1,3 +1,5 @@
+// в телеграмі дали відповідь, що "name" - являється саме унікальним значенням / ключом (2025-09-01)
+
 const pairInput = document.getElementById("pairInput");
 const pairList = document.getElementById("pairList");
 
@@ -25,22 +27,19 @@ function addPair() {
 
 function addPairIntoPairs(inputString) {
     const inputValues = inputString.split("=");
-    // console.log(inputValues);
-    inputValues.map(s => s.trim());
-    const [name, value] = inputValues;
-    pairs.push({ name, value });
+    const pair = inputValues.map(s => s.trim());
+    const [name, value] = pair;
+    const searchResult = pairs.find(({name: pairName}) => name === pairName);
+    if (searchResult) {
+        searchResult.value = value;
+    } else {
+        pairs.push({ name, value });
+    }
 }
 
 function deleteSelectedPairs() {
-    // оскільки в коментарях написали, що пари можуть повторюватись, довелось трішки змінити код
-    // const selectedValues = Array.from(pairList.selectedOptions).map(option => option.value);
-    // pairs = pairs.filter(p => !selectedValues.includes(`${p.name}=${p.value}`));
-
-    // видаляємо виділені елементи
-    Array.from(pairList.selectedOptions).forEach(option => option.remove());
-    // обновимо pairs з елемента форми
-    pairs = [];
-    Array.from(pairList.options).forEach(option => addPairIntoPairs(option.value));
+    const selectedValues = Array.from(pairList.selectedOptions).map(option => option.value);
+    pairs = pairs.filter(p => !selectedValues.includes(`${p.name}`));
     renderList();
 }
 
@@ -57,23 +56,25 @@ function sortListByValue() {
     sortList("value");
 }
 
-function fillByDefaultValues() {
-    pairs = [
-        { name: "Test", value: "123" },
-        { name: "Hello", value: "World" },
-        { name: "Happy", value: "Coding" },
-        { name: "Test", value: "123" },
-        { name: "Test", value: "123" },
-    ];
-    renderList();
-}
-
 function renderList() {
     pairList.innerHTML = "";
     pairs.forEach(pair => {
         const option = document.createElement("option");
-        option.value = `${pair.name}=${pair.value}`;
+        option.value = `${pair.name}`;
         option.textContent = `${pair.name}=${pair.value}`;
         pairList.appendChild(option);
     });
+}
+
+// for testing
+function fillByDefaultValues() {
+    pairs = [
+        { name: "Hello", value: "World" },
+        { name: "Happy", value: "Coding" },
+        { name: "Key", value: "Value" },
+        { name: "key", value: "value" },
+        { name: "Test", value: "123" },
+        { name: "Test2", value: "345" },
+    ];
+    renderList();
 }
