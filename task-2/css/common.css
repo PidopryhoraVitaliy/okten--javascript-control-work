@@ -1,0 +1,61 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/*******************************************************/
+/* Project */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    margin: 20px;
+    background: #F3F3F3;
+}
+
+h1, h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.info-container {
+    background: #F9F9F9;
+    border: 1px solid #D0D0D0;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.info-container:hover {
+    background: #FFFFFF;
+}
+
+.hidden {
+    display: none;
+}
+
+.details-link {
+    width: 25%;
+    min-width: 120px;
+    padding: 5px;
+    background: #00A0F0;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.details-link:hover {
+    background: #0060E0;
+}

@@ -10,26 +10,24 @@
 const searchParams = new URLSearchParams(window.location.search);
 const userId = searchParams.get('id');
 
-const userDetailsContainer = document.getElementById('user-details-container');
-const loadPostsBtn = document.getElementById('load-posts-btn');
-const postsContainer = document.getElementById('posts-container');
-const postsLoadingLabel = postsContainer.getElementsByClassName('loading-label')[0];
-
 // Load User Details
+const userDetailsContainer = document.getElementById('user-details-container');
+
 fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
     .then(res => res.json())
     .then(user => {
+        // console.log(user);
         userDetailsContainer.innerHTML = '';
         fillUserDetails(userDetailsContainer, user);
     });
 
 function fillUserDetails(container, info, marginLeft=0) {
     const marginLeftStep = 20;
+    const commonStyle = 'margin-top: 4px;';
     for (const prop in info) {
         const propElement = document.createElement('p');
-        if (marginLeft) {
-            propElement.setAttribute('style', 'margin-left: ' + marginLeft + 'px;');
-        }
+        const currentStyle = commonStyle + (marginLeft ? 'margin-left: ' + marginLeft + 'px;' : '');
+        propElement.setAttribute('style', currentStyle);
         if (isObject(info[prop])) {
             propElement.innerHTML = `<b>${prop}:</b>`;
             fillUserDetails(propElement, info[prop], marginLeft + marginLeftStep);
@@ -45,6 +43,10 @@ function isObject(value) {
 }
 
 // Load Posts
+const loadPostsBtn = document.getElementById('load-posts-btn');
+const postsContainer = document.getElementById('posts-container');
+const postsLoadingLabel = postsContainer.getElementsByClassName('loading-label')[0];
+
 loadPostsBtn.addEventListener('click', () => {
     postsContainer.querySelectorAll('.post-card').forEach(postCard => postCard.remove());
     postsLoadingLabel.classList.remove('hidden');
