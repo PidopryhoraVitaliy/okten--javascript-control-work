@@ -35,17 +35,20 @@ function addPairIntoPairs(inputString) {
     } else {
         pairs.push({ name, value });
     }
+    savePairs();
 }
 
 function deleteSelectedPairs() {
     const selectedValues = Array.from(pairList.selectedOptions).map(option => option.value);
     pairs = pairs.filter(p => !selectedValues.includes(`${p.name}`));
     renderList();
+    savePairs();
 }
 
 function sortList(sortBy) {
     pairs.sort((a, b) => a[sortBy].localeCompare(b[sortBy]));
     renderList();
+    savePairs();
 }
 
 function sortListByName() {
@@ -78,3 +81,21 @@ function fillByDefaultValues() {
     ];
     renderList();
 }
+
+// -----------------------------------------------------------------
+// добавлено після відправки форми
+
+// Local Storage
+function savePairs() {
+    localStorage.setItem("pairs", JSON.stringify(pairs));
+}
+
+function loadPairs() {
+    const data = localStorage.getItem("pairs");
+    if (data) {
+        pairs = JSON.parse(data);
+        renderList();
+    }
+}
+
+loadPairs();
